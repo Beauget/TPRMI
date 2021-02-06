@@ -14,24 +14,28 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
     }
 
 
-
+    // Taille du cabinet
     @Override
     public int tailleCabinet() throws RemoteException {
         return this.animalList.size();
     }
 
+
+    // Ajout d'un client
     @Override
     public void addClient(IClient iClient) throws RemoteException {
         this.clientList.add(iClient);
-        System.out.println("[AddCLIENT] bien enregistré");
+        System.out.println("[AJOUT CLIENT] Nouveau client bien enregistré ! " + iClient.toString());
     }
 
+    // Suppression d'un client
     @Override
     public void deleteClient(IClient iClient) throws RemoteException {
         this.clientList.remove(iClient);
-        System.out.println("[DeleteCLIENT] bien supprimé");
+        System.out.println("[SUPPRESSION CLIENT] Client bien supprimé ! " + iClient.toString());
     }
 
+    // Récupérer un animal en particulier (sinon il est créer)
     @Override
     public Animal getPatient(String nom) throws RemoteException {
         if(this.contains(nom)) {
@@ -47,6 +51,8 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
         return null;
     }
 
+
+    // Ajout d'un animal + vérification du nombre d'animaux pour les ALERT
     @Override
     public Cabinet add(Animal a) throws RemoteException {
         this.animalList.add(a);
@@ -66,6 +72,8 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
         return this;
     }
 
+
+    // Suppression d'un animal + vérification du nombre d'animaux pour les ALERT
     @Override
     public Cabinet suppr(String nom) throws RemoteException{
         for(int i = 0; i < this.animalList.size();i++) {
@@ -88,6 +96,8 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
         return this;
     }
 
+
+    // Afficher tout les animaux
     @Override
     public void printTout() throws RemoteException {
         for(Animal a : animalList) {
@@ -95,12 +105,13 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
         }
 
     }
-
+    // Créer un animal
     public void createAnimal(String nom, String nommaitre, String race, Espece e) throws RemoteException {
         AnimalImp created = new AnimalImp(nom,nommaitre,race,new DossierDeSuivi("Vide"),e);
         this.add(created);
     }
 
+    // ALERT tout les clients
     @Override
     public void alertAllClients(int i) throws RemoteException {
         for(IClient c : clientList) {
@@ -108,6 +119,8 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
         }
     }
 
+
+    // Vérifie si un animal est déjà dans un cabinet
     @Override
     public boolean contains(String nom) throws RemoteException {
         boolean res = false;
