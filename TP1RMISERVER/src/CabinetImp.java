@@ -76,11 +76,21 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
     // Suppression d'un animal + vérification du nombre d'animaux pour les ALERT
     @Override
     public Cabinet suppr(String nom) throws RemoteException{
-        for(int i = 0; i < this.animalList.size();i++) {
-            if(this.animalList.get(i).getNom().equals(nom)) {
-                this.animalList.remove(i);
+
+        while(this.contains(nom)) {
+            for(int i = 0; i < this.animalList.size();++i) {
+                if (this.animalList.get(i).getNom().equals(nom)) {
+                    this.animalList.remove(i);
+                }
             }
         }
+       /* for(int i = 0; i < this.animalList.size();++i) {
+            if(this.animalList.get(i).getNom().equals(nom)) {
+                System.out.println("Taille de la liste : " + this.animalList.size());
+                System.out.println("J'ai trouver : " + nom + " à l'indice" + i);
+                this.animalList.remove(i);
+            }
+        } */
         switch (this.animalList.size()) {
             case 100:
                 alertAllClients(100);
@@ -124,7 +134,7 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
     @Override
     public boolean contains(String nom) throws RemoteException {
         boolean res = false;
-        for(Animal a : animalList) {
+        for(Animal a : this.animalList) {
             if(a.getNom().equals(nom)) {
                 res = true;
             }
