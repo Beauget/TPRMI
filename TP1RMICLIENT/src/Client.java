@@ -29,7 +29,7 @@ public class Client extends UnicastRemoteObject implements  IClient {
 
             while (cmd != 0) {
                 System.out.println("Voici quelques commandes pour tester l'application : ");
-                System.out.println("0 : Quittez l'application  ; 1 : Afficher tout les animaux du cabinet (côté serveur) ; 2 : Créer un animal (et déclencher une ALERT) ; 3 : Supprimer un animal via son nom");
+                System.out.println("0 : Quittez l'application  ; 1 : Afficher tout les animaux du cabinet (côté serveur) ; 2 : Créer un animal (et déclencher une ALERT) ; 3 : Supprimer un animal via son nom ; 4 : Afficher le dossier d'un animal via son nom");
                 cmd = cmdLine.nextInt();
             switch (cmd) {
                 case 0 :
@@ -59,7 +59,6 @@ public class Client extends UnicastRemoteObject implements  IClient {
 
                     // Ligne qui déclenche l'erreur si le Codebase n'est pas présent
                     Espece test = new TestEspece(espece);
-
                     stub.createAnimal(nom,maitre,race,test);
                 break;
                 case 3 :
@@ -70,9 +69,17 @@ public class Client extends UnicastRemoteObject implements  IClient {
                     stub.suppr(nomAnimal);
                     System.out.println("L'animal a bien été supprimé ! (taille cabinet maintenant : " + stub.tailleCabinet() + ")");
                 break;
+                case 4 :
+                    Scanner sc3 = new Scanner(System.in);
+                    System.out.println("Donnez le nom de l'animal dont vous voulez le dossier");
+                    String nomAnimal2;
+                    nomAnimal2 = sc3.nextLine();
+
+                    System.out.println("Dossier : " + stub.getDossier(nomAnimal2) );
+                    break;
                 default:
                     System.out.println("Commande inconnue rappel des commandes : ");
-                    System.out.println("0 : Quittez l'application  ; 1 : Afficher tout les animaux du cabinet (côté serveur) ; 2 : Créer un animal (et déclencher une ALERT) ; 3 : Supprimer un animal via son nom");
+                    System.out.println("0 : Quittez l'application  ; 1 : Afficher tout les animaux du cabinet (côté serveur) ; 2 : Créer un animal (et déclencher une ALERT) ; 3 : Supprimer un animal via son nom ; 4 : Afficher le dossier d'un animal via son nom" );
 
                 }
             }

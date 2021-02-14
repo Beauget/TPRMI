@@ -31,8 +31,8 @@ public class AnimalImp extends UnicastRemoteObject implements Animal {
     }
 
     @Override
-    public IDossierDeSuivi getDossier() throws RemoteException {
-        return null;
+    public String getDossier() throws RemoteException {
+        return this.d.getSuivi();
     }
 
     public DossierDeSuivi getDossierSuivi() throws RemoteException {

@@ -30,6 +30,8 @@ public class Serveur {
                 AnimalImp obj = new AnimalImp("Max", "Dns", "Griffon", doss, e);
                 cabinet.add(obj);
             }
+
+
             Registry registry = LocateRegistry.createRegistry(1099);
             //Registry registry = LocateRegistry.getRegistry();
             if (registry==null){

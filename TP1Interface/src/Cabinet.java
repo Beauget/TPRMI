@@ -12,6 +12,6 @@ public interface Cabinet extends Remote {
     public boolean contains(String nom) throws RemoteException;
     public void createAnimal(String nom, String nommaitre, String race, Espece e) throws RemoteException;
     public void alertAllClients(int n) throws RemoteException;
-
+    public String getDossier(String nom) throws RemoteException;
 
 }

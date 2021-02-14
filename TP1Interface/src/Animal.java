@@ -6,5 +6,7 @@ public interface Animal extends Remote {
 
     public String getNom() throws RemoteException;
 
-    public IDossierDeSuivi getDossier() throws RemoteException;
+    public String getDossier() throws RemoteException;
+
+    public IDossierDeSuivi getDossierSuivi() throws RemoteException;
 }

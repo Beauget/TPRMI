@@ -141,4 +141,15 @@ public class CabinetImp extends UnicastRemoteObject implements Cabinet  {
         }
         return res;
     }
+    // Affichage du dossier de l'animal (string)
+    @Override
+    public String getDossier(String nom) throws RemoteException{
+        for(int i = 0; i < this.animalList.size();i++) {
+            if (this.animalList.get(i).getNom().equals(nom)) {
+                return this.animalList.get(i).getDossier();
+            }
+        }
+        return "Cet animal n'existe pas";
+    }
+
 }
